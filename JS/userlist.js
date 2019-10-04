@@ -33,20 +33,34 @@ var users = [
         "email": "",
         "isReviewer": true,
         "isAdmin": true
-    }
+    },
+    {
+        "id": 4,
+        "username": "Lid",
+        "password": "Lid",
+        "firstname": "Lid",
+        "lastname": "Tse",
+        "phone": "343-555-1212",
+        "email": "lid@admin.com",
+        "isReviewer": true,
+        "isAdmin": false
+    },
 ]
 
 function refresh(){
     var tbodyCtrl = document.getElementById("tbody");
     tbodyCtrl.innerHTML ="";
     for(var user of users){
+        if(!user.isAdmin){
+            continue;
+        }
         var tr ="<tr>";
         tr += `<td>${user.id}</td>`
         tr += `<td>${user.username}</td>`
         tr += `<td>${user.firstname}</td>`
         tr += `<td>${user.lastname}</td>`
-        tr += `<td>${user.isAdmin}</td>`
-        tr += `<td>${user.isReviewer}</td>`
+        tr += `<td>${user.isAdmin ? "Yes" : "No"}</td>`
+        tr += `<td>${user.isReviewer ? "Yes" : "No"}</td>`
         tr +="</tr>";
         tbodyCtrl.innerHTML += tr;
     }
