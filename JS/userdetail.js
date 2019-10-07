@@ -47,22 +47,24 @@ var users = [
     },
 ]
 
-function refresh(){
-    var tbodyCtrl = document.getElementById("tbody");
-    tbodyCtrl.innerHTML ="";
-    for(var user of users){
-        if(!user.isAdmin){
-            continue;
-        }
-        var tr ="<tr>";
-        tr += `<td>${user.id}</td>`
-        tr += `<td>${user.username}</td>`
-        tr += `<td>${user.firstname}</td>`
-        tr += `<td>${user.lastname}</td>`
-        tr += `<td>${user.isAdmin ? "Yes" : "No"}</td>`
-        tr += `<td>${user.isReviewer ? "Yes" : "No"}</td>`
-        tr +="</tr>";
-        tbodyCtrl.innerHTML += tr;
-
+var display = function() {
+    var id = document.getElementById("nbr").value;
+    var selectedUser;
+    for(var user of users) {
+        if(user.id == id) {
+            selectedUser = user;
+        }    
     }
+
+    set("pid", selectedUser.id);
+    document.getElementById("pname").innerText = `${selectedUser.firstname} ${selectedUser.firstname}`
+    document.getElementById("pisreviewer").innerText = `${selectedUser.isReviewer ? "Yes" : "No"}`
+    document.getElementById("pisadmin").innerText = `${selectedUser.isAdmin ? "Yes" : "No"}`
 }
+
+var set = (pid, val) =>{
+document.getElementById(pid).innerText = val;
+}
+
+
+
