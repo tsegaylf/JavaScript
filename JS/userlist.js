@@ -1,6 +1,6 @@
 console.log("Connected!");
 
-var users = [
+var xusers = [
     {
         "id": 1,
         "username": "adm",
@@ -47,7 +47,7 @@ var users = [
     },
 ]
 
-function refresh(){
+function refresh(users){
     var tbodyCtrl = document.getElementById("tbody");
     tbodyCtrl.innerHTML ="";
     for(var user of users){
@@ -59,10 +59,19 @@ function refresh(){
         tr += `<td>${user.username}</td>`
         tr += `<td>${user.firstname}</td>`
         tr += `<td>${user.lastname}</td>`
-        tr += `<td>${user.isAdmin ? "Yes" : "No"}</td>`
         tr += `<td>${user.isReviewer ? "Yes" : "No"}</td>`
+        tr += `<td>${user.isAdmin ? "Yes" : "No"}</td>`
         tr +="</tr>";
         tbodyCtrl.innerHTML += tr;
 
     }
+}
+
+const getUsers = () => {
+    let url = "http://localhost:54318/api/users";
+    $.getJSON(url)
+    .done((res) =>{
+        console.log(res);
+        refresh(res);
+    });
 }
